@@ -41,3 +41,14 @@ def update_book(book_id: UUID, book: Book):
             Books[counter - 1] = book
             return Books[counter - 1]
     return HTTPException(status_code=404, detail=f"ID {book_id}: Does not exist")
+
+
+@app.delete("/{Book_id}")
+def delete_book(book_id: UUID):
+    counter = 0
+    for x in Books:
+        counter += 1
+        if x.id == book_id:
+            del Books[counter - 1]
+            return f"ID: {book_id} deleted"
+    return HTTPException(status_code=404, detail=f"ID {book_id} :Does not exist")
